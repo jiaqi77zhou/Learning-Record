@@ -1,0 +1,1635 @@
+1.布尔判断===========================================================================================================================================================
+	(1)布爾值的判斷,短路邏輯
+		1.運行:
+		re=1>2 and print("你看見我了嗎")
+		結果是什麼?(answer---------------->answer:因爲前面的re已經是錯的了,所以不輸出任何東西)
+
+		2.運行:
+		re=1<2 and print("你看見我了嗎")
+		結果是什麼?(answer---------------->answer:因爲前面的re已經是對了,所以輸出)
+
+		3.運行:
+		re=1<2 or print("你看見我了嗎")	
+		結果是什麼?(answer-------------->answer:沒有輸出,因爲前面的已經是對的了,後面的就不會運行了)
+
+		//***結論:後面不影響結果,就不會運行
+		  ***應用:當多個運算進行判斷的時候,應該將複雜的判斷運算放到後面
+
+	(2)If的真值表達式
+		str_input=input("請輸入:)
+			if str_input:
+				print("處理")
+				以上代碼和if str_input !="": print("處理")
+
+
+
+
+
+
+2.列表==================================================================================================================================================================
+	(1)創建
+		創建的時候可以用圓括號/方括號 
+		list中什麼都可以放
+		list01=list("abcde")裏面可以放多個可迭代對象
+			['a','b','c','d','e']
+		list=[3,"a",234,False]
+		
+	(2)增加 append
+		insert
+
+	(3)獲取
+		單個切片	不建議用切片的方法就用len索引來進行循環訪問就ok
+		索引		反向索引的方法:
+				for i in range(len(list02)-1,-1,-1):
+	    			   print(list02[i])
+		循環
+
+	(4)修改
+		list01=[1,2,3,4,5,6]
+		list01[:3]='abcd' 
+		會把右邊的東西遍歷,然後插入到左邊,如果數量不吻合,就是進行插入,而不會是覆蓋
+		output:list01[a,b,c,d,4,5,6]
+
+	(5)賦值
+		1.切片會創造新的容器		
+			list01=list02[:]
+			這樣就有兩個不同的列表
+			切片複製都會有新的容器
+			
+		2.用切片賦值的意思就是1:往後就會被覆蓋成你所寫的東西
+						原來的會被抹掉
+			list01=['a','b','c','323','23']
+			list02=list01
+			list01[1:]=['123','123']
+			print(list02)=====>['a', '123', '123']
+			
+		3.要分清改的是列表/列表元素
+			list01=['a','b','c','323','23']
+			list02=list01
+			list02[3]='03'
+					=====>list02=list01=['a', 'b', 'c', '03', '23']
+		
+			list01=['a','b','c','323','23']
+			list02=list01
+			list02=3
+					=====>此時list02是一個int了 list01不會發生變化
+							
+		4.深拷貝和淺拷貝
+			深拷貝:將所有依賴的都賦值了
+				strength:深拷貝後的數據與之前的數據互不影響
+				shortcome:佔用內存
+			
+			淺拷貝:複製一層
+
+
+		5.字符串和列表的相互转化
+			<1>輸入字符串,但是直接讀入爲list
+				items=list(map(int,input().split()))
+			
+			<2>产生垃圾和如何解决
+				str_result=""  
+				for itmes in range(10):
+					str_result+= str(item)
+					因为字符串有不可变性 因为这样每一次都会产生一个新的String
+					这样子写的话会产生很多内存垃圾
+										
+				解决方法=====>使用列表,不使用字符串,最后再将列表转成字符串
+				list_result=[]
+				for items in range(10):
+					list_result.append(str(item))					
+					result="".join(list_result)
+
+
+		6.列表表达式
+				list01=[item for itmem in range(1,11) if item%2==0]
+
+
+
+
+
+3.元祖=================================================================================================================================================================
+	(1)不能增删改查
+		但是可以在之前就弄一个变量
+	  		tuple_days_of_month=(31,day_mont02,32,13,24,234)
+		或者增加一个列表,就可以变列表里面的东西
+			tuple01=(1,2,3,4,5,2,list01)
+
+	(2)不能多预留空间
+		而列表有预留空间
+			list01=[1,3]
+			list01=(2,3)
+			list01.append 可能会出错
+
+	(3)设置一个元祖的时候不能用
+		tuple01=(1,)
+
+	(4)printting中使用的本质就是创建元祖
+
+	(5)元祖的增加
+		tuple01=("a","b")
+		tuple01+=("c",)
+
+	(6)元祖的使用
+		数据管理当中,有利于判断是否存在 用 in
+
+	(7)元祖和字符串/列表的转化
+		tuple01=tuple(list01)
+
+
+
+
+
+
+4.字典=================================================================================================================================================================
+	(1)语法和内核
+		dict=dict()
+		dict01={} 大括号
+		散列:通过哈希运算,进行分类,进而查找迅速
+		     本质存储不连续,没有下标
+
+	(2)字典创建
+		dict01=dict([("a","b"),("j","c")])
+		如果tuple01=tuple(dict01),那么只会存键的值
+		
+	(3)添加
+		直接加dict01['dfd']=123
+
+	(4)遍历
+		  dict01.key
+		  dict01.value
+	   	  dict01.items=同时获取键和值
+			  for items in dic01.items():
+		    	  	items[0]===>key
+				items[1]===>value
+			
+			  fore key,value in dic01.items():
+				print(key)
+				print(value)
+		
+	(5)删除
+		del dic01[key]
+		全部删除
+		因为不能遍历字典的同时删除字典
+		所以只能够先复制一个新的键的组合,然后再用这个新的组合删掉之前的
+		item_list = tuple(big_shopping_mall.keys())
+		for i in item_list:
+		    if big_shopping_mall[i] > 100:
+			del big_shopping_mall[i]
+
+	(6)清空字典
+		#清空字典的方法 清除所有的时候可以用.clear
+		tuple_key=tuple(dic01.keys())
+		     for key in tuple_key:
+			del dic01[key]
+
+	(7)嵌套
+		访问字典里的字典 dict[第一个键][第二个键]
+		tourist {北京:
+				{景区:[1,2,3,4,5] ,
+				 美食:[1,2,3,4,5]
+				}
+			上海:
+				{景区:[1,2,3,4,5] ,
+				 美食:[1,2,3,4,5]
+				}
+			}
+			
+			访问北京的美食:
+			tourist[北京][美食]
+
+	(8)根据值查找键
+		<1>遍历字典 
+			for k,v in dic01.items
+			       if v==102:print(k
+		<2>键值互换,然后再通过键找人
+			dict={v:k for k,v in dict.items():}
+			问题是很多值会被覆盖掉
+
+
+
+
+5.集合==================================================================================================================================================================
+	(1)定义:不重复的不可变的 散列 
+	(2)特点:可变散列容器
+		可以存储整型\浮点型\字符串\元祖
+		无法存储列表,字典这些可变的数据类型
+
+	(3)语法:set01=set()
+	(4)做去重的方法:最快的就是列表放到集合里面
+		list01=[1,2,3,4,5,5,3,3]
+		set01=set(list01)
+		list01=list(set)
+	(5)集合运算
+		交集	&	取两集合公共的元素	
+		并集	|	取两集合全部的元素	
+		差集	-	取一个集合中另一集合没有的元素	
+		对称差集^	取集合 A 和 B 中不属于 A&B 的元素
+		判断子集 <   	不是的返回False	
+
+
+
+
+
+
+
+
+6.函数==================================================================================================================================================================
+	(1)重构
+		<1>快捷键:
+			重命名函数/名字:点名字,shift+F6
+			将内容收集 contrl+shift+M
+
+	(2)传参
+		<1>整理:序列位置,星号元祖,命名关键字,双星号字典形参
+			def func1(a=1,b=1,*args,p1=1,p2=1,*kwargs)
+			第一第二个一定要传
+			args后面的选择性传 传的话一定要关键字传
+	
+		<2>结构:
+			实际参数
+				位置实参 
+				列表实参*
+			关键字实参 
+				字典实参**	
+
+			形式参数
+				位置形参 
+				星号元祖形参:*后面的必须使用关键字实参传递
+			关键字形参
+				字典形参: 关键字实参数量可以无限, 将关键字实参合并为字典
+				**kwargs 
+										
+	(3)具体内涵
+		<1>位置实参:实参根据位置与形参对应
+          		  只要不是一一对应,则异常
+				fun01(1, 2, 3)
+
+ 		<2>序列实参:使用*可以直接把值拆开,传到里面去
+  			[数据太多]
+           		 根据位置和形参对应
+			list01 = ["a", "b", "c"]
+			str01 = "abc"01testing
+			fun01(*str01)
+
+		<3>关键字实参:根据名称和实参对应
+			keyword argument
+			fun01(p1=list01[0], p2=list01[2], p3=list01[1])
+
+		<4>字典实参:**将字典中键值对拆分,根据名称与形参对应
+	  		[数据太多]
+			dict01 = {"p1": "a", "p2": "c", "p3": "d"}
+			fun01(*dict01)
+			fun01(**dict01)
+
+		<5>默认参数 ==0
+			要求,从右到左的存在,下面的情况会报错	
+			def fun01(p1=0, p2, p3=0)
+
+
+
+7.类====================================================================================================================================================================
+
+	(1)__init__
+		__init__:初始化方法,在创建对象是自动调用
+		self:存的是class内创建的对象的地址
+		     调用方法时,自动将实例存储的对象地址传递给self
+
+	(2)class 的命名
+		单词首字母大写
+		各个单词中间不用_隔开,因为首字母大写已经可以把单词隔开能进行阅读了
+	  
+	(3)快捷键
+		 alt+enter 加入名字
+		 shift+O 父类		
+
+	(4)类的内存图	
+		证明为w1本质上只是列表,直接赋值的话,值会随着另一个值发生变动,且在函数中改变了的数值,也会发生变化
+		class Wife():
+		    def __init__(self,name,weight,height=128):
+			self.name=name
+			self.weight=weight
+			self.height=height
+
+		w1=Wife("消防",100,123)
+		w2=w1
+		w1.name="22"
+		print(w2.name)				
+			======================>输入'22',w1随着w2变化而变化
+
+
+		def change(p1):
+			#类外加一个函数
+		   	p1.weight=1000
+		change(w1)
+		print(w1.weight)			
+			=========>输出1000,w1[0]发生了改变,是列表中的改变,而不是栈帧消失以后就消失,是可以在函数内改变实例的值的
+
+
+	(5)实例变量
+		1.对象.变量名
+			w1.husband='Jack'
+			print(w1.husband)
+		  	即使类中没有该变量名,也可以在类外面中添加/在类中_init_外
+			但是该做法不推荐但不报错
+			因为这样会不方便数据的统一管理
+			
+		2.查看实例变量中的存储
+			w1.__dic__()
+			可以通过对象的__dict__数据成员,访问当前对象所有实例变量		
+			返回字典
+		
+		3.不建议类.方法
+		  如果就想通过类名调用,那么必须手动传递对象地址
+			Wife.play(w1)
+
+
+	(6)类的数据
+		类变量 VS 实例变量:
+			类变量是大家共享的
+			实例变量是一个动不会动全身的
+			类方法不能访问实例变量
+		当想要表达大家的数据要在init前面创造
+		当想操作大家的数据的时候 要用@classmethod
+		如果只是想用全局变量 可以用global
+			example:银行例子中总行和分行的关系
+				class ICBC():
+					total_money=10000000000	#类的数据
+
+					@classmethod		#类的方法
+					def print_total_money(cls):
+						print("总行的钱是",cls.total_money)
+						
+					def _init__(self,name="",money=0):
+						self.name=name
+						self.money=money
+						ICBC.total_money-=money
+
+					
+	(7)转换字符串	
+			__str__函数：将对象转换为字符串(对人友好的)
+			__repr__函数：将对象转换为字符串(解释器可识别的)
+		class StudentModel:
+			    def __init__(self, name="", age=0):
+				self.name = name
+				self.age = age
+
+			    def __str__(self) -> str:
+				# 终端输出方便
+				return self.name
+
+			    def __repr__(self) -> str:
+				# 将python对象转化为python语法合适的字符串
+				return 'StudentModel("%s",%d)' % (self.name, self.age)
+				# 将它持久写出去
+
+
+			s01 = StudentModel("悟空", 2)
+			print(s01)
+			str_p = s01.__repr__()
+			print(str_p)
+
+			# 价值:字符串可以像python代码一样执行
+			# re = eval(input("随意输入:"))
+			# print(re)
+
+			# 对象克隆 备份
+			# 对象持久化存储,存到文件/数据库
+			s02 = eval(s01.__repr__())
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+9.面向对象==============================================================================================================================================================
+
+	1.三大特征
+	  <1>封装=====================================================================================
+		1.数据角度
+			<1>定义:将基本数据基本类型复合成为一个类
+			<2>优势:(1)代码可读性高
+			        (2)将数据与对数据的操作相关联(从数据和方法角度上说)
+				   具体做法: self.__name=name
+
+		2.行为角度
+			定义:隐藏细节
+			具体做法:(1)私有成员: def __fun01()
+					本质上为障眼法,	
+	 			 (2)对数据进行封装:
+					2.1能读能写
+				 		def __init__(self,age):
+							self.age=age
+
+		              	      		@property
+						def age(self):
+							return self.__age
+						@age.setter
+						def age(self, value):
+					   		self.__age= age
+
+					2.2只读属性设置:
+						把setter删掉
+						把一开始的self.age=age 改成 self.__age=160,一个自己设置的
+						class Wife():
+			   				def __init__(self,name="",age=1,weight=23):
+								self.__age=160
+			    				@property
+			    				def age(self):
+								return self.__age
+		
+					2.3只写不读
+						class Wife()
+							def __init__(self,height=0)
+								self.height=height
+
+							def height(self,value):
+								self.__height=value
+
+							height=property(None,height)
+							costSP=property(None,None)
+
+							@costSP.setter         
+							def costSP(self,value):
+								self.__costSP=value
+				
+		3.设计角度	
+				(1)分而治之
+					每一个类处理一个独立的功能
+				(2)变而梳之
+					变化的地方独立封装,避免影响其他类
+				(3)高内聚
+					职责单一
+				(4)低耦合
+					类和类依赖度低
+
+
+		<2>继承=====================================================================================
+			1.定义
+				重用现有类的功能,并在此基础上进行扩展
+			2.代码
+	 			class 子类(父类):
+	 			def __init__(self,参数列表):
+					super().__init__(参数列表)
+							self.自身实例变量 = 参数
+					复写父类的init函数
+			 3.内置函数
+				class Student(Person):
+					s01=Student()
+				isinstance(对象,类)
+				isinstance(s01,Student)       判断实例是不是一种类型
+				isinstance(s01,Person)        父类返回的也是True
+				issubclass(类,类)
+				issubclass(Student,Person)    True 判断是不是父子类
+				type()==type()
+				type(s1)==Person	      判断精确到最小,父类返回的是False
+				type(s1)==Student	      True 
+							
+			4.缺点:耦合度高
+			5.设计角度:
+				同一概念,隔离变化;		
+				多个类概念上是一致的,需要统一处理的
+			6.多继承:
+				同名方法MRO 自身==>父从作到右==>再上层父类
+				
+
+		<3>多态=============================================================================
+			1.定义:
+				父类的同一种动作或者行为，在不同的子类上有不同的实现。
+			2.作用:
+				在继承的基础上,进行扩展,体现类型的个性化
+			3.语法现象:
+				重写	
+
+
+
+
+
+
+	2.六大原则
+		(1)开闭原则
+				规范对象:每个类设计的原则
+				内涵:对扩展开放,对修改关闭
+		(2)单一原则
+				规范对象:每个类设计的原则
+				内涵:功能单一
+		(3)迪米特法则
+				规范对象:类和类之间的数据传输
+				内涵:数据传输不能呈网状结构
+		(4)依赖倒置
+				规范对象:客户端和类之间的关系
+				内涵:调父不调子,调父执行子
+		(5)里氏替换
+				规范对象:父子类之间的关系
+				内涵:子类应包含父类的所有方法,并进行扩展
+		(6)组合复用
+				规范对象:类与类之间的关系,减少继承的使用
+				内涵:
+
+
+
+
+
+
+
+	3.优秀代码===>降龙十八掌
+			"""
+			    技能系统
+				优势:外接一个需求的变化,内部修改一个类.
+				    增加一个新影响效果,增加一个类.
+				    某个技能的影响效果改变,无需修改代码.
+				    [依赖注入:将配置文件中的信息,作为技能释放的效果]
+			"""
+
+			class SkillImpactEffect:
+			    """
+				技能影响效果 [父]
+			    """
+			    def impact(self):
+				pass
+
+
+			class DamageEffect(SkillImpactEffect):
+			    """
+				伤害生命
+			    """
+			    def __init__(self, value):
+				self.value = value
+
+			    def impact(self):
+				print("扣你", self.value, "血量")
+
+
+			class LowerDeffenseEffect(SkillImpactEffect):
+			    """
+				降低防御力
+			    """
+			    def __init__(self, value, time):
+				self.value = value
+				self.time = time
+
+			    def impact(self):
+				print("让你", self.time, "秒以内防御力降低", self.value)
+
+
+			class DizzinessEffect(SkillImpactEffect):
+			    """
+				眩晕
+			    """
+			    def __init__(self, time):
+				self.time = time
+
+			    def impact(self):
+				print("眩晕", self.time, "秒")
+
+
+			class SkillDeployer:
+			    """
+				技能释放器
+			    """
+
+			    def __init__(self, name=""):
+				# 技能名称
+				self.name = name
+				# 字典类型的配置文件(需求),右边是调用了函数
+				self.__dict_configs = self.__load_config_file()
+				# 列表类型的影响效果对象, 右边是调用了函数
+				self.__list_effect_object = self.__create_effect_object()
+
+			    def __load_config_file(self):
+				return {
+				    "少林普攻": ["DamageEffect(50)"],
+				    "降龙十八掌": ["DamageEffect(200)", "DizzinessEffect(5)", "LowerDeffenseEffect(50,5)"]
+				}
+
+			    def __create_effect_object(self):
+				# self.name  -->  self.__dict_configs --> []
+				list_effect_name = self.__dict_configs[self.name]
+				list_effect_object = []
+				for item in list_effect_name:
+				    # "DamageEffect(50)" --> DamageEffect(50)
+				    #  字符串 现在变成了python对象,就是eval的能力
+				    effect_object = eval(item)
+				    list_effect_object.append(effect_object)
+				return list_effect_object
+
+			    def generate_skill(self):
+				print(self.name, "释放啦")
+				# 将当前技能的所有影响效果执行一遍
+				for item in self.__list_effect_object:
+				    item.impact()
+
+			# 测试.............
+			xlsbz = SkillDeployer("降龙十八掌")
+			xlsbz.generate_skill()
+			xlsbz.generate_skill()
+
+			slpg = SkillDeployer("少林普攻")
+			slpg.generate_skill()
+
+
+
+
+
+
+10.项目流程===============================================================================================================================================================
+	软件项目生命周期
+		1.前期市场
+			招投标(government)
+			招标====>招标文件/需求建议书
+			投标====>招标文件/需求分析书					[销售/客户经理]
+											[产品经理]
+		2.项目开发		
+			项目启动=====>立项报告					        [项目经理]
+			需求调研[开发人员基本不参与]=====>深入了解客户到底要干什么
+				      		需求规格说明书/系统需求说明书
+			设计开发
+
+				概要设计(架构设计\关键类设计都有,需要和客户进行协商)       [软件架构师]
+					=====>概要设计方案                        
+				详细设计=====>详细设计方案					
+					      类当中有什么函数			
+					OOA Object Oriented Analysis面向对象分析
+					OOD Object Oriented Design面向对象设计
+				编码工作=====>代码					 [软件工程师]
+					OOP 编码
+					单元测试
+				整体测试
+
+				安装调试
+					让甲方知道怎么用
+				试运行
+				
+				项目验收
+			
+		3.售后服务
+			新需求
+
+
+
+
+11.模塊===================================================================================================================================================================
+	(1)導入
+		import filename
+			用的时候会需要filename.functionname	
+		from filename import *
+			导入该模块全部成员
+		from filename import function_name
+			导入部分,如果重名则冲突,使用就近原则
+		快捷键, alt+回车
+		!!!!以上代碼導入的時候,其實是將文件夾全部執行了一遍!!!!
+		!!!!而且是只會執行一遍的!!!
+
+	(2)文件夾
+			右键 mark directory as ==>sources root 其实就是往sys.path中加入了路径
+			这样直接就可以import 到文件
+
+	(3)工程中文件的命名
+		  bll.py		       business logic layer
+	 	  usl.py		       user show layer
+		  model.py		XXXModel
+		  main.py		main 
+
+	(4)__pyc_cache
+		=====>用于编译
+		所有python第一个模块没有pyc,没有办法优化
+		只有被导入的模块才有pyc文件
+		所以就將簡單的東西放在沒有導入的地方,在main的位置
+
+	(5)__init__文件
+		當文件夾是package的時候,就會有 __init__文件
+		在 __init__文件的价值 
+		就是导入*的时候,会把下面的两个带上
+		__all__=["module03","modeuleo4"]
+
+	(6)模塊變量
+		__name__ : 如果是主模块(=当前模块), 就叫__main__  
+			   如果是导入的,就会叫模块的名字
+				 if __name__=="__main__":
+				    #如果把我导入到别的地方去,就不会执行
+				    #只能作为主模块执行(便于优化)
+		
+		__file__:返回路径
+		__doc__:三引号注释
+			def func01:
+				""" 我是func01""" 
+				
+			print(func01.__doc__)	==>我是func01
+
+	(7)標準庫的應用
+		1.time 	
+			import time 			
+			time.localtime()		       返回当前时间的时间元祖,正常人用的
+
+			时间戳 <============================  时间元祖   <========================字符串			
+			time.time	   mktime                                      strptime
+	      		当前的时间戳
+		       	time.strptime("2019/09/21", "%Y/%m/%d")
+			# 格式化成2016-03-20 11:45:39形式
+			time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) 
+			time.ctime()
+
+
+
+
+12.異常處理=============================================================================================================================================================
+	(1)异常处理
+		现象:当异常发生的时候,程序不再向下执行,而是转到函数的语句
+		語法:
+			Try
+			Except ValueError: (如果异常类型是valueerror,则在此进行...
+			Except ZeroDivisionError:
+			Finally:无论是否发生异常,都会执行当前代码
+			else:程序没有错误才会执行
+
+	(2)步骤
+		1.抛出异常:
+			相当于是快速传递了信息(消息/错误编号/错误代码…)
+										>>>>>面向对象的思想就要将数据封装起来
+					----需要自定义异常类,名字尾部一定要有Error,一定是继承自Exception
+
+		2.定義類
+		  但是其实更多的时候,都用默认的异常就可以了
+			class AgeError(Exception):
+			    """
+				其实Exception并没有给出什么太多的可以处理的东西
+				继承它只是一种convention
+			    """
+
+			    def __init__(self, error_id=0, error_message="", error_code=""):
+				self.error_id = error_id
+				self.error_message = error_message
+				self.error_code = error_code
+
+
+			class Wife:
+			    def __init__(self, name, age):
+				self.name = name
+				self.age = age
+
+			    @property
+			    def age(self):
+				return self.__age
+
+			    @age.setter
+			    def age(self, value):
+				if 20 < value < 300:
+				    self.__age = value
+				else:
+				    raise AgeError(101, "我不要", "if 20 < value < 300:")
+
+			try:
+			    w01 = Wife("Jack", 340)
+			except AgeError as e:
+			    #做了一个变量名,接受了这个类的实例内容
+			    print(e.error_id,e.error_message,e.error_id)
+
+
+		3.异常处理:接受异常信息
+
+
+
+
+
+
+13.迭代==================================================================================================================================================================
+	(1)能被for循環的條件/能夠被迭代的條件:
+		可迭代对象
+			list01=[3,4,2,34,3,56,34,56,33,3]
+			iterator = list01.__iter__()
+			#获取迭代器
+			#能被for循环的条件是/能够被迭代/遍历的条件: 对象具有__iter__方法
+			while True:
+			    try:
+				item=iterator.__next__()
+				#获取下一个元素
+				print(item)
+			    except StopIteration:
+				break
+
+
+	(2)迭代自己寫的類
+		(1)先写一个类,里面包含了可以迭代的东西self.__skills=[]
+		(2)写迭代的循环
+			(1)拿出迭代器:
+				itertator = skill.__iter__()
+			(2)进行循环
+			while Ture:
+				item = iterator.__next__()
+				print(item)
+		(3)因为前面iterator是skill里面产生的
+			所以写一个类里面的方法 def __iter__
+				 def __iter__(self):
+				# 创建了实例对象
+				return SkillIterator(self.__skills)
+		(4)生成的iterator需要具有 __next__的方法
+			所以写一个类,里面有next的方法,以及和前面需要有传参的过程
+			依次返回一个值,需要用到index控制返回什么
+			当index超出的时候,需要抛异常,让下面接住
+		(5)具体实现代码如下:
+			class SkillIterator:
+			    def __init__(self, data):
+				self.__data = data
+				self.__index = -1
+
+			    def __next__(self):
+				# 因为返回之后它需要用到next进行迭代
+				if self.__index >= len(self.__data)-1:
+				    raise StopIteration()                
+					====>这里raise什么是可以自己随便写的, 只要和下面运行的时候的Error相对应,就可
+				self.__index += 1
+				return self.__data[self.__index]
+
+
+			class SkillManager:
+			    def __init__(self):
+				self.__skills = []
+
+			    def add_skill(self, str_skill):
+				self.__skills.append(str_skill)
+
+			    # 重写
+			    def __iter__(self):
+				# 创建了实例对象
+				return SkillIterator(self.__skills)
+
+
+			manager = SkillManager()
+			manager.add_skill("六卖身键")
+			manager.add_skill("佛山无影交")
+			manager.add_skill("像咯那是个十八章")
+		
+			iterator = manager.__iter__()
+
+			while True:
+			    try:
+				item = iterator.__next__()
+				print(item)
+			    except StopIteration:
+				break
+
+	(3)迭代器的框架設計[有圖]
+			设计的时候要想到为什么想这个 是因为有爹 而且是无形的父类
+			所以知道爹,就知道儿子们需要怎么用
+
+	(4)yield自动生产
+		<1>标志着看见的代码不仅仅是这个样子的
+		<2>	yield和return的差别:
+			如果是只要找一个就是return 如果是yield就是多个
+		<3>生成代码的大致规则:
+			将yield以前的代码,放到__next__方法中
+			将yield后面的数据,作为__next__方法的返回值
+		<4>优势:不会爆内存
+			调用一次next,计算一次,返回一次
+			应用代码:
+			(1)简单应用
+				class SkillManaging:
+			  	  def __init__(self, list01):
+					self.skill_list = list01
+					self.index=-1
+		
+				    def __iter__(self):
+					for i in range(len(self.skill_list)):
+					    self.index+=1
+					    yield self.skill_list[self.index]
+
+				list01 = [123, 32, 23, 2, 6, 5, 2, 4, 4, 5, 5]
+				mm = SkillManaging(list01)
+		
+				for item in mm:
+				    print(item)
+
+				(1)yield 适用于返回多个数据
+			
+				代码:"""
+					定义函数,获取列表中所有偶数
+		  		  	"""
+					list01 = [1223, 2, 47, 24, 4, 34, 6, 43, 67, 6, 2, 334, 31, 23]
+
+					#传统的方法:
+					def tra_get_even():
+					    list02 = []
+					    for item in list01:
+						if item % 2 == 0:
+						    list02.append(item)
+					    return list02
+
+					#新的方法:
+					def gen_get_even():
+					    index = 0
+					    while index < len(list01):
+						if list01[index] % 2 == 0:
+						    yield list01[index]
+						index += 1
+			
+					#本质上调用依次next 计算一次 返回一次
+					for item in gen_get_even():
+					    print(item)
+
+	(5)使用iter开回车
+		先打iter 然后就会跳出来for循环,先写后面的需要迭代的东西,回车就会写item名字.
+		再回车,就会得到下面的东西
+
+
+14.生成器=================================================================================================================================================================
+	(1)内置生成器和他们的实现方法
+		<1>enumerate
+			1.简单运用enumerate:
+				list01=[233,243,45783,82,4989,3]
+				for index,item in enumerate(list01):
+				    if item<30:
+					print(index,item)
+				
+				其实只是for在调用__next__
+			2.自己写一个实现enumerate的函数:
+				def my_enumerate(iterable):
+				    index = 0
+				    for item in iterable:
+					yield (index, item)
+					index += 1
+
+
+				list01 = [234, 4, 3, 23, 4, 5, 34, 23, 4, 3, 3234]
+				for item in my_enumerate(list01):
+				    print(item)
+						
+		<2>zip压缩
+			1.简单运用zip:
+				实际上zip可以接受多个
+				list01=[233,243,45783,82,4989,3]
+				list02=["a","b","c","d","e"]
+				for item in zip(list01,list02):
+				    print(item)
+					===>只会短的那个和别的组合输出:(233, 'a')
+								(243, 'b')
+								(45783, 'c')
+								(82, 'd')
+								(4989, 'e')	
+			2.自己写一个两个的zip:		
+				def my_zip(list01, list02):
+				    if len(list01) > len(list02):
+					length = len(list02)
+				    else:
+					length = len(list01)
+
+				    for i in range(length):
+					yield (list01[i], list02[i])
+
+			3.写一个多个的zip
+				def my_zip3(*args):
+				    shortest_list = len(args[0])
+				    for i in args:
+					if shortest_list > len(i):
+					    shortest_list = len(i)
+
+					#主要是yield返回的时候,直接(value1,value2,value3)返回的全都是地址值
+					 需要将他们返回的先弄成一个列表,再将它变成元祖,这样才可以一下子拿到全部
+				    for i in range(shortest_list):
+					list_yield=[]
+					for j in args:
+					    list_yield.append(j[i])
+					yield tuple(list_yield)
+
+	(2)生成器表达式
+		<1>语法	:	
+			#当列表推倒式的[]的变成了(),就是变成了生成器
+			result02 = (item for item in list01 if item % 2 == 0)
+			for item in result02:
+			    print(item)
+			
+			print(type(result02)) 会是<class 'generator'>
+
+		<2>生成器源代码:
+			class Generator:
+			    def __iter__(self): #可迭代对象
+				return self
+
+			    def __next__(self): #有next就是迭代器
+				return 数据
+
+		<3>具体例子
+			"""
+			练习:
+			生成器函数 生成器表达式
+			1.在技能类表中,查找所有技能名称和攻击力
+			2.查找名称大于4个字的技能
+			3.查找攻击力大于150的技能名称
+			"""
+				class Skill:
+				    def __init__(self, name="", atk=0, cost_sp=0, duration=0):
+					self.name = name
+					self.atk = atk
+					self.cost_sp = cost_sp
+					self.duration = duration
+				    def __str__(self):
+					return self.name
+			
+
+				list01 = [Skill("乾坤大挪移", 160, 30, 5),
+				    	Skill("独孤九剑", 120, 20, 4),
+				   	 Skill("降龙十八掌", 200, 43, 8)]
+
+				#用函数,当别人要用的时候,写成这个样子
+				def search_name_atk():
+				    for item in list01:
+					yield item.name, item.atk
+
+				for item in search_name_atk():
+				    print(item)
+				
+				#用的是表达式,当只是子集在做,自己再用的时候
+				  此时返回的的是地址值,因为返回的item中,class没有__str__
+				result1 = (item for item in list01 if len(item.name) > 4)
+				for item in result1():
+				    print(item)
+
+
+				#用的还是表达式,缩写了
+				for i in (item.name for item in list01 if item.atk > 150):
+				    print(i)
+
+	(3)生成器的优缺点
+		<1>优点:節省內存
+		<2>缺点:数据只能从头到尾操作一次
+		     	解决方案:
+			从惰性操作变成立即操作,这样就可以通过索引/切片/多次获取数据
+			g01=IterableTools.select(......) [一个生成器]
+			t01=tuple(g01)
+		<3>具体对生成器优势运用	
+			"""
+				掷骰子n次,有多少种不同的组合				
+			"""
+			list_dice = [1, 2, 3, 4, 5, 6]
+			n=int(input("请输入筛子数量"))
+			#这样写容易溢出
+			list_result=list(itertools.product(list_dice,repeat=n))
+			print(list_result)
+
+			#这样使用就不会卡死,迭代器的优势,没有放在内存里面
+			for item in itertools.product(list_dice,repeat=n):
+			    total+=1
+			    print(item)
+
+
+
+
+15.函数式编程============================================================================================================================================================
+	(1)函数式编程基础
+		<1>定义:函数可以赋值给变量,赋值后变量绑定函数
+			语言集成查询 Language Integrated Query--->相当于是一个框架 
+		      	我们写的就是一个集成操作框架
+			放在类中,传递核心逻辑
+		<2>作用:函数不会被调死,可以传个参数,就灵活拼接函数应该要做什么
+		<3>思想:还是可以用封装/继承/多态的思想,将函数作为参数进行传递
+		<4>代码:
+			"""
+				1.定义函数,找出字符串
+				2.找出大于10的整数
+				3.找出长度大于2的字符串
+			"""
+			list01 = [2, "2", "31", 34, "lys","343423", True, 5.276, 4, 2, '234', 2.3211, 9]
+
+
+			def find_all_string(item):
+			    if type(item) == str:
+				return True
+			    return False
+
+
+			def find_all_sting_2(item):
+			    if find_all_string(item):
+				if len(item) > 2:
+				    return True
+			    return False
+
+
+			def find_all_int_10(item):
+			    if isinstance(item,(int,float)) and item >10:
+				return True
+			    return False
+
+
+			def find01(condition):	
+			#万能查找函数find 根据不同的condition进行定义 可以得出不同的效果
+			    for item in list01:
+				if condition(item):
+				    yield item
+
+
+			for i in find01(find_all_string):
+			    print(i)
+
+			for i in find01(find_all_int_10):
+			    print(i)
+
+			for i in find01(find_all_sting_2):
+			    print(i)
+						
+	(2)静态方法
+		<1>语法:@staticmethod
+		     用类名点就可以了,没有自动传参,不会自动传参
+		     静态方法不能访问实例和类
+		<2>使用场景:什么数据都不用操作,就可以用静态方法
+			 可以定义常用的函数
+			基于此,对上面的代码进行优化:
+			"""
+				1.定义函数,找出字符串
+				2.找出大于10的整数
+				3.找出长度大于2的字符串
+			"""
+			1.iterable_tools.py
+				class IterableHelper:
+				    @staticmethod
+				    #静态方法什么都不会传递进来
+				    def find01(iterable, func_condition):
+					"""
+					    通用的查找多个元素方法
+					:param iterable: 需要搜索的可迭代对象
+					:param func_condition: 搜索的逻辑/条件
+					:return:生成器对象
+					"""
+					for item in iterable:
+					    if func_condition(item):
+						yield item
+			2.exercise05.py
+				from common.iterable_tools import IterableHelper
+				for item in IterableHelper.find01(list01,find_all_int_10):
+		   			 print(item)
+
+	(3)匿名方法
+		<1>语法:lambda 参数:返回值
+		    	  lambda不支持赋值语句
+		<2>优势:自己写给自己用,不会产生新的函数名,用完即毁
+		<3>例子:	     
+			a=lambda a,b:a+b
+			c= lambda a,b:print(a**b)
+				c(2,3)
+			具体项目代码中应用:
+			#将这个三个函数缩写:
+			 def function01(item):
+				return item.cost_sp==0	
+			 def function02(item):
+				return (item.name,item.cost_hp,item.atk)
+			#写成这个样子,不需要有名字:
+			IterableHelper.single(list01,lambda item:item.cost_sp==0)
+			IterableHelper.select(list01,lambda item:(item.name,item.cost_hp,item.atk))
+
+
+	(4)内置高阶函数
+		<1>过滤:filter(func_condition,iterables)
+			具体需求:找出体重大于50的老婆	     
+			这个返回的是一个生成器
+			(1)可以这么写
+				new_list = filter(lambda item: item.age >= 4, wife_list)
+				for item in new_list:
+				    print(item)
+			(2)也可以这么写		
+				for item in filter(lambda item: item.age >= 4, wife_list):
+				    print(item)
+
+		<2>映射:map(func_condition,iterable)
+			具体需求:找出所有老婆的年龄/攻击/etc
+			返回:生成一个map对象，可遍历可迭代
+			     Python 3.x 返回迭代器 
+
+		<3>最小/最大
+			当在这两个的提示里面*,表示后面的全部都是要用关键字传参
+		       min()
+		       max()
+		
+		<4>排序:sortted
+			没有改变当前列表的值,而是返回了一个新的列表
+			支持降序
+
+		<5>类:itertools
+			 1.多个循环 product
+				  itertools.product(iterable,repeat=需要循环的层数)
+					笛卡尔积:全排列
+					for item in itertools.product(list_dice, list_image):
+			   			print(item)
+			 2.排列	permutations
+				(1)"""需求:四个里面1取三个"""
+				for item in itertools.permutations(tuple_person,3):
+				    print(item)
+
+				(2)"""需求:012345中找出5位的偶数"""
+				tuple_number = (0, 1, 2, 3, 4, 5)
+				total = 0
+				for item in itertools.permutations(tuple_number, 5):
+				    if item[0] != 0 and item[4] % 2 == 0:
+					total += 1
+					print(item)
+				print(total)
+				
+				(3)"""需求:012345中找出5位的偶数,结合其他内置函数进行改写:"""
+				tuple_number = ('0', '1', '2', '3', '4', '5')
+				total = 0
+				for item in filter(lambda item: int(item[-1]) % 2 == 0 and item[0] != '0', itertools.permutations(tuple_number, 5)):
+				    print(int("".join(item)))
+			  
+
+			 3.组合 combinations
+				(1)	"""
+					有三种药品,一共要取出100粒
+					要求:每种药都必须要有
+					数学想法:
+						隔板的想法
+						123|4.....99|100
+						相当于是99个缝,插3个隔板,有多少种插法
+					编程思想:
+						当数学思想要转化成编程思想的时候,需要用更多的举例子\建立简单的模型的方式来方便思考,更接近问题的本质,方便枚举和优化算法
+					"""
+					import itertools
+					total = 0
+
+					for item in itertools.combinations(range(1,100), 2):
+					    print(item[0],item[1]-item[0],100-item[1])
+					    total += 1
+
+					print(total)
+
+
+
+16.函数作为返回值=========================================================================================================================================================
+	(1)Enclosing函数嵌套
+	  	<1>作用:作用域的原因,没办法在fun02当中修改a的值,所以一定要用nonlocal
+		<2>代码:
+			def func01():
+			    a = 10
+			    def fun02():
+				nonlocal a
+				a+=1
+			    fun02()
+			    print(a)
+
+			func01()
+
+	(2)闭包
+		<1>要素
+			1.必须有内嵌函数
+			2.内嵌函数必须引用外部函数
+			3.外部函数必须返回内部函数
+				def func01():
+				    a = 10
+				    def fun02():
+					nonlocal a
+					a += 1
+					print(a)
+				    return fun02
+
+				re = func01()
+				re()#调用的是fun01的函数,外部函数的栈帧没有立刻消失,它在等着内部函数对其进行调用
+		<2>应用场景:
+			1.逻辑连续
+			2.具体代码
+				def give_gife_money(money):
+				    def chile_buy(target, price):
+					nonlocal money
+					if money > price:
+					    print(target, price)
+					    money -= price
+					else:
+					    print("不够钱")
+
+				    return chile_buy
+				action = give_gife_money(1000)
+				action("水枪", 900)
+				action("水枪", 900)
+						
+		
+
+	(3)装饰器decorators
+		<1>作用:不改变原函数的定义,增加新功能
+			可以随意增加和减少
+			本质上来说就是在覆盖变量名,让原变量名中的函数的内容增加了
+		<2>具体实现代码:
+			def id_confirmation(function):
+			    def wrapper(*args, **kwargs):#形参位置,是为了合
+				print("验证权限:")
+				return function(*args, **kwargs) #在调用原有函数,把原有函数的返回值作为新函数的返回值
+								  因为怕在参数传递当中出现了原函数很多的函数
+								  所以只能把这些个参数全都写进去了
+								#实参位置,是为了拆
+			    return wrapper
+
+
+			@id_confirmation #相当于enter_background=id_confirmation(enter_background)
+			def enter_background():
+			    print("进入后台")
+
+		
+	
+17.python内存管理机制(自动化)=======================================================================================================================================
+	(1)引用计数:
+		<1>定义:每个对象存储被变量引用的次数,当引用次数为0时,对象被销毁
+		<2>缺点:循环引用
+			list01=[]
+			list02=[]
+			list01.append(list02)
+			list02.append(list01)
+			del list01,list02
+			这样两个列表不能被访问了,可是两个列表还是相互引用了,引用计数均为1,
+	(2)标记清除:
+		<1>定义:扫描内存,查看是否存在无法访问的内存空间
+		<2>优势:解决上面引用计数的问题
+		<3>缺点:耗时
+	(3)分代回收:
+		<1>定义:将内存空间分为多个区域(代),每次在年轻代创建新对象
+			当一代空间耗尽时.进行升代操作
+		<2>优势:解决上面耗时的问题
+		<3>具体操作:
+			年轻代==>中年代==>老年代			
+			(1)当内存接近没有了的时候,进行扫描,对有用的进行标记
+			(2)把他们存到中年代中,进行升代,然后把年轻代的进行清空,从头开始存储数据
+	(4)对以上内容的解决:
+		<1>减少内存的使用,尽量避免循环使用	
+		<2>找到合适的升代时间
+			但是python内在的升代机制时间有自身的算法,所以初学者来说没有足够的行业经验,没有必要控制	
+		<3>对于创建出来又很快消除掉的对象,可以创造对象池进行缓存
+			python自带的不可变对象有池:整数对象池\小数对象池\字符串对象池\bool池
+				可变对象:没有池,但是可以根据自身需求
+							
+
+
+
+
+
+
+
+18.MVC==================================================================================================================================================================
+MVC框架搭建代码示意:
+(1)"""购物车例子"""
+	class CommodityModel:
+	    def __init__(self):
+		self.list_commodity_info = {
+		    101: {"name": "屠龙刀", "price": 10000},
+		    102: {"name": "倚天剑", "price": 10000},
+		    103: {"name": "九阴白骨爪", "price": 8000},
+		    104: {"name": "九阳神功", "price": 9000},
+		    105: {"name": "降龙十八掌", "price": 8000},
+		    106: {"name": "乾坤大挪移", "price": 10000}
+		}
+
+		self.list_order = []
+
+
+	class ShoppingController:
+	    def __init__(self):
+		pass
+
+	    def check_out(self,total_amount):
+		while True:
+		    money = float(input("总价%d元，请输入金额：" % total_amount))
+		    if money >= total_amount:
+		        print("购买成功，找回：%d元。" % (money - total_amount))
+		        CommodityModel.list_order.clear()
+		        break
+		    else:
+		        print("金额不足.")
+
+	    def total_price_calculate(self):
+		total_amount = 0
+		for order in CommodityModel.list_order:
+		    commodity = CommodityModel.list_commodity_info[order["cid"]]
+		    total_amount += commodity["price"] * order["count"]
+		return total_amount
+
+	    def check_commodity_in_shop():
+		while True:
+		    cid = int(input("请输入商品编号："))
+		    if cid in CommodityModel.list_commodity_info:
+		        break
+		    else:
+		        print("该商品不存在")
+		        return False
+		return cid
+
+
+	class ShoppingView:
+	    def __init__(self):
+		pass
+
+	    def main_view(self):
+		print("欢迎光临,本店商品如下:")
+		self.show_commodity_info()
+		while True:
+		    item = input("1键购买，2键结算。")
+		    if item == "1":
+		        ShoppingController.choosing_commodity()
+
+		    elif item == "2":
+		        total_amount = ShoppingController.total_price_calculate()
+		        ShoppingController.check_out(total_amount)
+
+	    def show_commodity_info(self):
+		for key, value in CommodityModel.list_commodity_info.items():
+		    print("编号：%d，名称：%s，单价：%d。" % (key, value["name"], value["price"]))
+
+	    def print_order_list():
+		for order in CommodityModel.list_order:
+		    commodity = CommodityModel.list_commodity_info[order["cid"]]
+		    print("商品：%s，单价：%d,数量:%d." % (commodity["name"], commodity["price"], order["count"]))
+
+	    def choosing_commodity():
+		ShoppingView.show_commodity_info()
+		cid = ShoppingController.check_commodity_in_shop()
+		if cid:
+		    count = int(input("请输入购买数量："))
+		    CommodityModel.list_order.append({"cid": cid, "count": count})
+		    print("添加到购物车。")
+
+
+	view=ShoppingView()
+	view.main_view()
+
+
+
+
+
+(2)"""学生管理系统例子"""
+	<1>=========================Model.py=========================================================
+		class StudentModel:
+		    def __init__(self, name="", age=0, score=0):
+			self.__studentid = -1
+			self.name = name
+			self.age = age
+			self.score = score
+
+		    @property
+		    def studentid(self):
+			return self.__studentid
+
+		    @studentid.setter
+		    def studentid(self, value):
+			self.__studentid = value
+	
+
+	<2>==========================usl.py===========================================================
+		from model import StudentModel
+		from bll import StudentManagerController
+
+
+		class StudentManagerView:
+		    """
+		    学生管理器界面
+		    """
+		    status = True
+		    Controller = StudentManagerController()
+
+		    def __init__(self):
+			pass
+
+		    def main(self):
+			while StudentManagerView.status:
+			    self.__display_menu()
+			    self.__select_menu()
+
+		    def __display_menu(self):
+			print("1.添加学生")
+			print("2.显示学生")
+			print("3.删除学生")
+			print("4.修改学生")
+			print("5.按照成绩升序排列")
+
+		    def __select_menu(self):
+			item = input("请输入选项")
+			if item == '1':
+			    self.__input_students()
+			elif item == '2':
+			    self.__output_students()
+			elif item == '3':
+			    self.__delete_students()
+			elif item == '4':
+			    self.__update_students()
+			elif item == '5':
+			    self.__sort_students_by_score()
+			elif item == '':
+			    print("退出系统.")
+			    StudentManagerView.status = False
+			else:
+			    print("请输入正确已有选项")
+
+		    def __input_students(self):
+			str_student_info = input("请输入学生信息:姓名 年龄 成绩")
+			list_student_info = list(str_student_info.split(sep=' '))
+			try:
+			    new_student = StudentModel(list_student_info[0].title(), int(list_student_info[1]), int(list_student_info[2]))
+			    StudentManagerView.Controller.add_student(new_student)
+			except ValueError:
+			    print("输入的学生年龄和成绩需要为整数")
+			    self.__input_students()
+			else:
+			    print("添加成功.")
+			    print()
+
+
+
+		    def __output_students(self):
+			for i in range(StudentManagerController.student_in_system):
+			    print('学生姓名:', StudentManagerView.Controller.stu_list[i].name, end=' ')
+			    print('ID:', StudentManagerView.Controller.stu_list[i].studentid, end=' ')
+			    print('年龄', StudentManagerView.Controller.stu_list[i].age, end=' ')
+			    print('成绩', StudentManagerView.Controller.stu_list[i].score, end=' ')
+			    print()
+			print()
+
+		    def __delete_students(self):
+			str_student_info = input("请输入需要删除学生的ID:")
+			try:
+			    StudentManagerView.Controller.remove_student(int(str_student_info))
+			except ValueError:
+			    print("请输入正确学生ID,该数应为整数")
+			    self.__delete_students()
+
+		    def __update_students(self):
+			str_student_info = input("请输入需要修改的学生信息:姓名 ID 年龄 成绩")
+			list_student_info = list(str_student_info.split(sep=' '))
+			try:
+			    new_student = StudentModel(list_student_info[0].title(), int(list_student_info[2]), int(list_student_info[3]))
+			    new_student.studentid = int(list_student_info[1])
+			    StudentManagerView.Controller.update_student(new_student)
+			except ValueError:
+			    print("请输入正确学生信息,ID\年龄\成绩均应为整数")
+			    self.__update_students()
+
+			else:
+			    print("修改成功.")
+			    print()
+
+		    def __sort_students_by_score(self):
+			StudentManagerView.Controller.sort_by_score()
+			print("排序成功.排序结果如下:")
+			self.__output_students()
+
+
+	<3>==========================bll.py=================================================================================
+		class StudentManagerController:
+		    student_total_id = 0
+		    student_in_system = 0
+
+		    def __init__(self):
+			self.__stu_list = []
+
+		    @property
+		    def stu_list(self):
+			return self.__stu_list
+
+		    def add_student(self, new_student):
+			if new_student.studentid == -1:
+			    self.generate_id(new_student)
+			    self.__stu_list.append(new_student)
+			else:
+			    raise Exception("This student has already in the System.Her/His ID is:", new_student.studentid)
+
+		    def generate_id(self, new_student):
+			StudentManagerController.student_total_id += 1
+			new_student.studentid = StudentManagerController.student_total_id
+			StudentManagerController.student_in_system += 1
+
+		    def remove_student(self, studentid):
+			for i in self.__stu_list:
+			    if i.studentid == studentid:
+				self.__stu_list.remove(i)
+				StudentManagerController.student_in_system -= 1
+				print("已成功删除")
+				print()
+				return True
+			print("该生不在系统内,无法进行删除")
+			print()
+			return False
+
+		    def sort_by_score(self):
+			for i in range(0, StudentManagerController.student_in_system - 1):
+			    for j in range(i + 1, StudentManagerController.student_in_system):
+				if self.stu_list[i].score > self.stu_list[j].score:
+				    self.stu_list[i], self.stu_list[j] = self.stu_list[j], self.stu_list[i]
+
+		    def update_student(self, student):
+			for i in range(len(self.stu_list)):
+			    if self.stu_list[i].studentid == student.studentid:
+				self.stu_list[i] = student
+
+
+	(4)main.py=========================================================================================================
+		from usl import StudentManagerView
+		from model import StudentModel
+		from bll import StudentManagerController
+
+		view = StudentManagerView()
+		view.main()
+
+
+
+
+
+
+
